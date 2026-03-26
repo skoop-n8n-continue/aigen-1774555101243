@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>The Apex Center | Directory</title>
+    <!-- Google Fonts for sleek corporate typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=j9x2k4">
+</head>
+<body>
+    <div id="app">
+        <!-- Persistent Header -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo"></div>
+                <div class="building-info">
+                    <h1>THE APEX CENTER</h1>
+                    <p>1000 Innovation Boulevard</p>
+                </div>
+            </div>
+            <div class="datetime">
+                <div id="time" class="time">--:--</div>
+                <div id="date" class="date">---</div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- View 1: Directory & Idle State -->
+            <section id="view-directory" class="view active">
+                <div class="split-layout">
+
+                    <!-- Left Column: Tenant Directory -->
+                    <div class="panel directory-panel">
+                        <div class="panel-header">
+                            <h2>Building Directory</h2>
+                            <div class="search-hint">Sort alphabetically</div>
+                        </div>
+                        <div class="directory-list-header">
+                            <span class="col-tenant">Tenant</span>
+                            <span class="col-floor">Floor</span>
+                            <span class="col-suite">Suite</span>
+                        </div>
+
+                        <!-- Scrollable List Container -->
+                        <div class="directory-viewport">
+                            <ul id="directory-list" class="directory-list">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visitor Check-In Action -->
+                    <div class="panel checkin-promo-panel">
+                        <div class="promo-content">
+                            <div class="icon-circle">
+                                <!-- SVG User Icon -->
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </div>
+                            <h2>Visitor Check-In</h2>
+                            <p class="subtitle">Welcome. All guests must register before proceeding to the elevators.</p>
+
+                            <ul class="instructions">
+                                <li>
+                                    <span class="step-num">1</span>
+                                    <span>Enter your details</span>
+                                </li>
+                                <li>
+                                    <span class="step-num">2</span>
+                                    <span>Select your host company</span>
+                                </li>
+                                <li>
+                                    <span class="step-num">3</span>
+                                    <span>Print your visitor badge</span>
+                                </li>
+                            </ul>
+
+                            <button id="btn-start-checkin" class="btn-primary pulse-animation">
+                                Touch Here to Check In
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- View 2: Interactive Check-In Wizard -->
+            <section id="view-checkin" class="view hidden">
+                <div class="wizard-container">
+
+                    <div class="wizard-header">
+                        <button id="btn-cancel-checkin" class="btn-ghost">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            Back to Directory
+                        </button>
+                        <div class="progress-indicator">
+                            <div class="dot active" data-step="1"></div>
+                            <div class="line"></div>
+                            <div class="dot" data-step="2"></div>
+                            <div class="line"></div>
+                            <div class="dot" data-step="3"></div>
+                        </div>
+                        <div class="timeout-warning" id="timeout-warning">
+                            Resetting in <span id="timeout-seconds">30</span>s
+                        </div>
+                    </div>
+
+                    <div class="wizard-body">
+
+                        <!-- Step 1: Visitor Name -->
+                        <div class="wizard-step active" id="step-1">
+                            <h2>Welcome. Let's get you checked in.</h2>
+                            <p>Please enter your full name as it appears on your ID.</p>
+
+                            <div class="input-group">
+                                <input type="text" id="visitor-name" placeholder="First and Last Name" autocomplete="off" spellcheck="false">
+                            </div>
+
+                            <div class="virtual-keyboard-placeholder">
+                                <p>System Keyboard Area</p>
+                                <span>(In a real kiosk, the OS touch keyboard would appear here)</span>
+                            </div>
+
+                            <div class="wizard-actions">
+                                <button id="btn-next-to-2" class="btn-primary" disabled>Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Select Company -->
+                        <div class="wizard-step hidden" id="step-2">
+                            <h2>Who are you visiting today?</h2>
+                            <p>Select the company from the directory below.</p>
+
+                            <div class="company-grid" id="company-selection-grid">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <div class="wizard-actions">
+                                <button id="btn-back-to-1" class="btn-secondary">Back</button>
+                                <button id="btn-next-to-3" class="btn-primary" disabled>Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Confirmation -->
+                        <div class="wizard-step hidden" id="step-3">
+                            <h2>Review & Confirm</h2>
+                            <p>Please verify your check-in details.</p>
+
+                            <div class="review-card">
+                                <div class="review-row">
+                                    <span class="label">Visitor Name</span>
+                                    <span class="value" id="review-name">John Doe</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="review-row">
+                                    <span class="label">Visiting</span>
+                                    <span class="value" id="review-company">Acme Corp</span>
+                                </div>
+                                <div class="review-row">
+                                    <span class="label">Location</span>
+                                    <span class="value" id="review-location">Floor 12, Suite 1200</span>
+                                </div>
+                            </div>
+
+                            <div class="legal-disclaimer">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="nda-checkbox">
+                                    <span class="checkmark"></span>
+                                    <span class="text">I agree to The Apex Center Visitor Policy and Non-Disclosure Agreement.</span>
+                                </label>
+                            </div>
+
+                            <div class="wizard-actions">
+                                <button id="btn-back-to-2" class="btn-secondary">Back</button>
+                                <button id="btn-finish" class="btn-primary" disabled>Confirm & Print Badge</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Success / Printing -->
+                        <div class="wizard-step hidden" id="step-4">
+                            <div class="success-content">
+                                <div class="success-icon-large">
+                                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#00b7af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                </div>
+                                <h2>You're all set, <span id="success-name">Guest</span>!</h2>
+
+                                <div class="badge-printing">
+                                    <div class="printing-animation"></div>
+                                    <p>Printing your visitor badge...</p>
+                                </div>
+
+                                <div class="wayfinding-card">
+                                    <h3>Wayfinding Instructions</h3>
+                                    <p>Proceed through the security turnstiles to <strong>Elevator Bank <span id="success-bank">A</span></strong>.</p>
+                                    <p>Your destination is <strong>Floor <span id="success-floor">12</span></strong>.</p>
+                                </div>
+
+                                <p class="auto-return">Returning to directory in <span id="success-countdown">8</span> seconds...</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js?v=j9x2k4"></script>
+</body>
+</html>
