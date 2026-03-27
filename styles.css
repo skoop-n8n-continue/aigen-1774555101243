@@ -188,40 +188,9 @@ body {
     font-weight: 600;
 }
 
-.search-container {
-    position: relative;
-    width: 280px;
-}
-
-.search-input {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--divider);
-    border-radius: 8px;
-    padding: 12px 16px;
-    color: var(--text-light);
+.search-hint {
+    color: var(--text-muted);
     font-size: 1rem;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.search-input:focus {
-    border-color: var(--accent-teal);
-    background-color: rgba(0, 183, 175, 0.05);
-}
-
-.search-input::placeholder {
-    color: var(--text-muted);
-}
-
-.empty-state {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    padding: 40px 20px !important;
-    justify-content: center;
-    background-color: transparent !important;
 }
 
 .directory-list-header {
