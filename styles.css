@@ -1,18 +1,18 @@
 /* CSS Reset & Variables */
 :root {
-    --bg-dark: #10181f; /* Primary dark navy/charcoal */
-    --bg-panel: rgba(255, 255, 255, 0.03);
-    --bg-panel-hover: rgba(255, 255, 255, 0.08);
-    --text-light: #ffffff;
+    --bg-light: #ffffff;
+    --bg-panel: rgba(0, 0, 0, 0.03);
+    --bg-panel-hover: rgba(0, 0, 0, 0.08);
+    --text-dark: #10181f;
     --text-muted: #6a7071;
     --accent-teal: #00b7af;
     --accent-teal-dark: #009993;
-    --divider: rgba(255, 255, 255, 0.1);
+    --divider: rgba(0, 0, 0, 0.1);
 
     --font-main: 'Inter', sans-serif;
 
     --border-radius: 12px;
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow: 0 8px 32px rgba(16, 24, 31, 0.1);
 }
 
 * {
@@ -22,8 +22,8 @@
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
     font-family: var(--font-main);
     overflow: hidden; /* Kiosk style, no global scroll */
     width: 100vw;
@@ -52,7 +52,7 @@ body {
     align-items: center;
     padding: 40px 60px;
     border-bottom: 1px solid var(--divider);
-    background: linear-gradient(to bottom, rgba(16, 24, 31, 1), rgba(16, 24, 31, 0.9));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
     z-index: 10;
 }
 
@@ -81,7 +81,7 @@ body {
     height: 0;
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 60px solid rgba(255,255,255,0.2);
+    border-bottom: 60px solid rgba(255,255,255,0.4);
 }
 
 .building-info h1 {
@@ -89,7 +89,7 @@ body {
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-light);
+    color: var(--text-dark);
     margin-bottom: 4px;
 }
 
@@ -108,7 +108,7 @@ body {
 .time {
     font-size: 3rem;
     font-weight: 300;
-    color: var(--text-light);
+    color: var(--text-dark);
     line-height: 1;
     margin-bottom: 4px;
 }
@@ -227,7 +227,7 @@ body {
     padding: 24px 20px;
     border-radius: 8px;
     margin-bottom: 8px;
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(0, 0, 0, 0.02);
     transition: background-color 0.2s;
 }
 
@@ -238,7 +238,7 @@ body {
 .directory-item .col-tenant {
     font-size: 1.4rem;
     font-weight: 500;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .directory-item .col-floor,
@@ -253,7 +253,7 @@ body {
     flex: 1;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(145deg, rgba(0, 183, 175, 0.05) 0%, rgba(16, 24, 31, 0) 100%);
+    background: linear-gradient(145deg, rgba(0, 183, 175, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
     border: 1px solid rgba(0, 183, 175, 0.2);
 }
 
@@ -266,7 +266,7 @@ body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: rgba(0, 183, 175, 0.1);
+    background-color: rgba(0, 183, 175, 0.05);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -305,7 +305,7 @@ body {
     height: 36px;
     border-radius: 50%;
     background-color: var(--accent-teal);
-    color: var(--bg-dark);
+    color: #ffffff;
     font-weight: 700;
     display: flex;
     justify-content: center;
@@ -317,7 +317,7 @@ body {
 /* Buttons */
 .btn-primary {
     background-color: var(--accent-teal);
-    color: var(--bg-dark);
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     padding: 24px 40px;
@@ -344,7 +344,7 @@ body {
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--text-light);
+    color: var(--text-dark);
     border: 2px solid var(--divider);
     border-radius: 8px;
     padding: 24px 40px;
@@ -356,7 +356,7 @@ body {
 }
 
 .btn-secondary:active {
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(0,0,0,0.05);
 }
 
 .btn-ghost {
@@ -389,7 +389,7 @@ body {
 .wizard-container {
     max-width: 900px;
     margin: 40px auto;
-    background-color: var(--bg-panel);
+    background-color: var(--bg-light);
     border-radius: var(--border-radius);
     border: 1px solid var(--divider);
     padding: 50px;
@@ -422,7 +422,7 @@ body {
 
 .progress-indicator .dot.active {
     background-color: var(--accent-teal);
-    box-shadow: 0 0 10px rgba(0, 183, 175, 0.5);
+    box-shadow: 0 0 10px rgba(0, 183, 175, 0.3);
 }
 
 .progress-indicator .line {
@@ -492,12 +492,12 @@ body {
 /* Step 1: Input */
 .input-group input {
     width: 100%;
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(0,0,0,0.02);
     border: 2px solid var(--divider);
     border-radius: 8px;
     padding: 30px;
     font-size: 2rem;
-    color: var(--text-light);
+    color: var(--text-dark);
     font-family: inherit;
     outline: none;
     transition: border-color 0.2s;
@@ -511,7 +511,7 @@ body {
 .virtual-keyboard-placeholder {
     margin-top: 40px;
     flex: 1;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.03);
     border: 1px dashed var(--divider);
     border-radius: 8px;
     display: flex;
@@ -536,7 +536,7 @@ body {
     width: 8px;
 }
 .company-grid::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.03);
     border-radius: 4px;
 }
 .company-grid::-webkit-scrollbar-thumb {
@@ -545,7 +545,7 @@ body {
 }
 
 .company-card {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
     border: 2px solid transparent;
     border-radius: 8px;
     padding: 20px;
@@ -561,7 +561,7 @@ body {
 }
 
 .company-card.selected {
-    background-color: rgba(0, 183, 175, 0.1);
+    background-color: rgba(0, 183, 175, 0.05);
     border-color: var(--accent-teal);
 }
 
@@ -577,7 +577,7 @@ body {
 
 /* Step 3: Review */
 .review-card {
-    background-color: rgba(255,255,255,0.03);
+    background-color: rgba(0,0,0,0.02);
     border: 1px solid var(--divider);
     border-radius: 8px;
     padding: 30px;
@@ -617,6 +617,7 @@ body {
     cursor: pointer;
     font-size: 1.2rem;
     user-select: none;
+    color: var(--text-dark);
 }
 
 .checkbox-container input {
@@ -634,14 +635,14 @@ body {
     transform: translateY(-50%);
     height: 30px;
     width: 30px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(0,0,0,0.05);
     border: 2px solid var(--divider);
     border-radius: 6px;
     transition: all 0.2s;
 }
 
 .checkbox-container:active .checkmark {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(0,0,0,0.1);
 }
 
 .checkbox-container input:checked ~ .checkmark {
@@ -664,7 +665,7 @@ body {
     top: 5px;
     width: 6px;
     height: 12px;
-    border: solid var(--bg-dark);
+    border: solid #ffffff;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
@@ -694,7 +695,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 15px;
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(0,0,0,0.03);
     padding: 20px 40px;
     border-radius: 40px;
     margin-bottom: 50px;
@@ -703,7 +704,7 @@ body {
 .printing-animation {
     width: 24px;
     height: 24px;
-    border: 3px solid rgba(0, 183, 175, 0.3);
+    border: 3px solid rgba(0, 183, 175, 0.2);
     border-top-color: var(--accent-teal);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -715,7 +716,7 @@ body {
 
 .wayfinding-card {
     background-color: rgba(0, 183, 175, 0.05);
-    border: 1px solid rgba(0, 183, 175, 0.2);
+    border: 1px solid rgba(0, 183, 175, 0.15);
     border-radius: 12px;
     padding: 40px;
     max-width: 600px;
@@ -733,7 +734,7 @@ body {
 .wayfinding-card p {
     font-size: 1.4rem;
     margin-bottom: 10px;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .wayfinding-card strong {
