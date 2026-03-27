@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Directory
         dirList: document.getElementById('directory-list'),
         dirViewport: document.querySelector('.directory-viewport'),
-        dirSearch: document.getElementById('directory-search'),
 
         // Navigation / Controls
         btnStart: document.getElementById('btn-start-checkin'),
@@ -127,15 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 2. Render Directory ---
-    function renderDirectory(filterText = '') {
-        const filtered = tenants.filter(t => t.name.toLowerCase().includes(filterText.toLowerCase()));
-
-        if (filtered.length === 0) {
-            els.dirList.innerHTML = '<li class="directory-item empty-state">No matching companies found</li>';
-            return;
-        }
-
-        els.dirList.innerHTML = filtered.map(t => `
+    function renderDirectory() {
+        els.dirList.innerHTML = tenants.map(t => `
             <li class="directory-item">
                 <span class="col-tenant">${t.name}</span>
                 <span class="col-floor">${t.floor}</span>
@@ -162,22 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.addEventListener('touchstart', resetIdleTimer);
         document.body.addEventListener('click', resetIdleTimer);
         document.body.addEventListener('input', resetIdleTimer);
-
-        // Directory Search
-        if (els.dirSearch) {
-            els.dirSearch.addEventListener('input', (e) => {
-                const term = e.target.value.trim();
-                renderDirectory(term);
-
-                // Stop auto scroll when searching
-                if (term.length > 0) {
-                    state.autoScrollActive = false;
-                    els.dirViewport.scrollTop = 0;
-                } else if (!state.isCheckInMode) {
-                    state.autoScrollActive = true;
-                }
-            });
-        }
 
         // View Navigation
         els.btnStart.addEventListener('click', startCheckIn);
@@ -232,12 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
         els.inputName.value = '';
         els.btnNext1.disabled = true;
 
-        if (els.dirSearch) {
-            els.dirSearch.value = '';
-            renderDirectory();
-            els.dirViewport.scrollTop = 0;
-        }
-
         document.querySelectorAll('.company-card').forEach(c => c.classList.remove('selected'));
         els.btnNext2.disabled = true;
 
@@ -264,12 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
         state.isCheckInMode = false;
         clearTimeout(state.idleTimer);
         hideTimeoutWarning();
-
-        if (els.dirSearch) {
-            els.dirSearch.value = '';
-            renderDirectory();
-            els.dirViewport.scrollTop = 0;
-        }
 
         els.viewCheckin.classList.remove('active');
 
